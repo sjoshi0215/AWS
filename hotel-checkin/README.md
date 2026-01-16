@@ -2,8 +2,6 @@ Backend   ---- Lambda function to persist to DB,
 Lambda trigger---API GATEWAY
 DB       ----  RDS Postgres
 
-![alt text](architecture.jpeg)
-
 Step 1) Create S3 bucket 
         a) Allow public access
         b) After creating bucket GOTO bucket permission TAB to to provide permission.
