@@ -55,7 +55,7 @@ document.getElementById("checkinForm").addEventListener("submit", async function
     messageDiv.textContent = "Submitting...";
 
     try {
-        const response = await fetch("https://mrvq6bcgxg.execute-api.us-east-1.amazonaws.com/savecheckins", {
+        const response = await fetch("https://lui56mscbb.execute-api.us-east-1.amazonaws.com/save-checkin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

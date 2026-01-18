@@ -60,6 +60,7 @@ Step 4) Create table for our application in DB
 
 
 Step 5) Now create a lambada for savecheckin and list checkins
+
         a) In AWS console search for Lambda then create Function then   Provide below details.
             Function name -- save-checkin-lambda
             RUntime -- Python 3.12 
@@ -81,4 +82,15 @@ Step 5) Now create a lambada for savecheckin and list checkins
                 "body": "{\"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"bookingId\": \"BK123456\", \"roomType\": \"Deluxe Suite\", \"checkinDate\": \"2026-01-16\"}"
             }
             
-            
+
+Step 6) Accessing the application.
+        Method 1) Using Lambda fu
+        nction URL (No API gateway needed.)
+
+        Method 2) Using API Gateway
+
+Step 6) Newly created python file where we are using Secure System Manager (SSM) to store the DB configuration under Parameter store. 
+        Method 1) Using Lambda fu
+        nction URL (No API gateway needed.)
+
+        Method 2) Using API Gateway
