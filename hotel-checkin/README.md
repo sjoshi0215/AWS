@@ -7,6 +7,7 @@ DB       ----  RDS Postgres
 Step 1) Create S3 bucket 
         a) Allow public access
         b) After creating bucket GOTO bucket permission TAB to to provide permission.
+                
                 Allow bucket policy anonymous access: 
                 {
                     "Version": "2012-10-17",		 	 	 
@@ -39,7 +40,7 @@ Step 2) Creating RDS/Postgress DB steps
         g) In Additional Configuration, disable Automated Backup
 
 Step 3) Check the DB connection.
-        a) Create a EC2 instance to connect to database
+        a) Create a EC2 instance to connect to database.
         b) Install postgresql clien on EC2: 
             sudo dnf update -y
             sudo dnf install postgresql15 -y
@@ -84,10 +85,48 @@ Step 5) Now create a lambada for savecheckin and list checkins
             
 
 Step 6) Accessing the application.
-        Method 1) Using Lambda fu
-        nction URL (No API gateway needed.)
+        Method 1) Using Lambda function URL (No API gateway needed.)
+            a) Under the Lambda click on Configuration TAB --> Function URL --> Create Function URl
+                AUTH Type : NONE
+                Additional Settings : 
+                    Select Check Box --> Configure cross-origin resource sharing (CORS)
+                    Allow headers --> content-type
+                    Allow origin --> *
+                    Allow Method --> *
+                Create the Function URL :
+            b) It will generate teh below Function URL 
+                save-checkin --> https://khgcze5fzy3wposbtr7kbd2loy0rrqfi.lambda-url.us-east-1.on.aws/
+                    Copy this URL in index.html
+                list-checkin --> https://x7bhmyh7qhwnrpx3thousnpscq0ziawn.lambda-url.us-east-1.on.aws/
+                    Copy this URL in bookings.html
+
 
         Method 2) Using API Gateway
+            a) Under API Gateway --> Create API
+                Choose API Type --> HTTP API
+                API name --> hotel-checkin
+                Integration Dropdown --> Select Lambda
+                Select Lambda Function which you want to integrate
+                    save-checkin -- select save-lambda
+                    list-checkin -- selc list-lambda
+                Configuration route --> 
+                    provide 2 routes
+                        Save-checkin:
+                            Method --> POST
+                            Resource-path --> /save-checkin
+                            Integration Target --> save-cehckin-lambda
+                        list-checkin:
+                        Method --> POST
+                        Resource-path --> /list-checkin
+                        Integration Target --> list-cehckin-lambda
+
+            b) After crating the API gateway, you will get the API gateway URl. 
+                    https://lui56mscbb.execute-api.us-east-1.amazonaws.com
+                    save-checkin -- https://lui56mscbb.execute-api.us-east-1.amazonaws.com/save-checkin (Update this URL index.html)
+                    list-checkin -- https://lui56mscbb.execute-api.us-east-1.amazonaws.com/list-checkin (Update this URL bookings.html)
+
+
+
 
 Step 6) Newly created python file where we are using Secure System Manager (SSM) to store the DB configuration under Parameter store. 
         Method 1) Using Lambda fu
