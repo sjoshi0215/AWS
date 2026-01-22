@@ -34,7 +34,8 @@ Step 1) Create S3 bucket named hotel-checkin
 
 
 Step 2) Creating RDS/Postgress DB steps
-    a) Choose security group to enable incoming on port 5432 from anythwhere. This is require to setup to allow postgress incoming connection.
+
+    a) Create a security group to enable incoming on port 5432 from anythwhere. This is required to setup to allow postgress incoming connection.
     b) Create a Postgres Database:
     c) Choose free tier: 
     d) username: postgres 
@@ -43,8 +44,9 @@ Step 2) Creating RDS/Postgress DB steps
     g) In Additional Configuration, disable Automated Backup
 
 Step 3) Check the DB connection.
+
     a) Create a EC2 instance to connect to database.
-    b) Install postgresql clien on EC2: 
+    b) Install postgresql client on EC2: 
         ```bash
         sudo dnf update -y
         sudo dnf install postgresql15 -y
@@ -53,6 +55,7 @@ Step 3) Check the DB connection.
     d) \dt to list tables
 
 Step 4) Create table for our application in DB
+
     ```sql
     CREATE TABLE checkins (
         id SERIAL PRIMARY KEY,
