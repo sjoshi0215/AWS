@@ -4,8 +4,9 @@ DB       ----  RDS Postgres
 
 ![alt text](architecture.jpeg)
 
-Step 1) Create S3 bucket 
-    a) Allow public access
+Step 1) Create S3 bucket named hotel-checkin
+
+    a) Uncheck "Block all public access" to allow public access, acknowledge and create bucket
     b) After creating bucket GOTO bucket permission TAB to to provide permission.
         
         Allow bucket policy anonymous access: 
