@@ -1,0 +1,7 @@
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/dto/ProductResponse.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/repository/ProductRepository.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/ProductServiceApplication.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/dto/ProductRequest.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/controller/ProductController.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/service/ProductService.java
+/workspaces/AWS/product-service/src/main/java/com/microservices/product/entity/Product.java

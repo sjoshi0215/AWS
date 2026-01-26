@@ -1,0 +1,7 @@
+com/microservices/product/service/ProductService.class
+com/microservices/product/entity/Product.class
+com/microservices/product/controller/ProductController.class
+com/microservices/product/repository/ProductRepository.class
+com/microservices/product/dto/ProductResponse.class
+com/microservices/product/dto/ProductRequest.class
+com/microservices/product/ProductServiceApplication.class
