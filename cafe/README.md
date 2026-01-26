@@ -1,3 +1,6 @@
+
+
+
 1) Microservices
     a) products
     b) users
@@ -47,11 +50,7 @@
                     'USD',
                     50,
                     'ACTIVE'
-    );
-
-
-
-
+                );
 
 
     b) USER SCHEMA
@@ -97,4 +96,73 @@
             ON order_schema.orders(order_status);
     
     
-3 APIs
+3) copilot to generate 3 microservices.
+    order-service
+    product-service
+    user-service
+
+4) Create 2 EC2 instances and upload the below microserive jars
+    a) ec2-instance-user
+            --> user-service-1.0.0.jar
+    b) ec2-instance-product-order
+            --> product-service-1.0.0.jar
+            --> order-service-1.0.0.jar
+    
+    upload command using cmd -->  
+    pscp -i <key_file>.ppk <file_name_to_upload> ec2-user@<ec2_ip_address>:/home/ec2-user/
+
+5) In your EC2 instance run below command to download JDK 17 to run springboot microservices.
+    command --> 
+        sudo yum update -y
+        sudo yum install java-17-amazon-corretto -y 
+                    (Install Java 17 (Amazon Corretto – Recommended))
+
+6) Attach the security group to the instance to accept HTTP request 
+
+7) run all the 3 microservices
+    java -jar <microservice_name>
+
+8) Try to use below url to access your application.
+        http://<ec2_instance_public_ip>:8001/api/v1/products/health
+        http://<ec2_instance_public_ip>:8002/api/v1/users/health
+        http://<ec2_instance_public_ip>:8003/api/v1/orders/health
+
+9) If step 8 worked and able to access the application then we are good to create Application Load balancing
+
+**************Application Load Balancing**************
+
+1 EC2 Instance order service is running
+2 EC2 Instance product/user service is running
+
+10) Create target Group
+    a) tg-products
+        target-type : Instances
+        Target Group Name : tg-products
+        Protocol : http
+        Port : 8001 (spring boot application is listening)
+        health check : /api/v1/products/health
+        Select instances from available instances
+        Include as pending below
+    
+     b) tg-users
+        target-type : Instances
+        Target Group Name : tg-users
+        Protocol : http
+        Port : 8001 (spring boot application is listening)
+        health check : /api/v1/users/health
+        Select instances from available instances
+        Include as pending below
+
+    c) tg-orders
+        target-type : Instances
+        Target Group Name : tg-orders
+        Protocol : http
+        Port : 8003 (spring boot application is listening)
+        health check : /api/v1/orders/health
+        Select instances from available instances
+        Include as pending below
+
+
+11) Create ALB and associate the target group and add rules
+    
+        
