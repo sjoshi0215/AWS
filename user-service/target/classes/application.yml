@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://postgress-db.ckpoyk4gmqrl.us-east-1.rds.amazonaws.com:5432/cafe
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Postgres1!
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8002
+  servlet:
+    context-path: /api/v1
+
+logging:
+  level:
+    root: INFO
+    com.microservices: DEBUG

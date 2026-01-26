@@ -1,16 +1,14 @@
 package com.microservices.order.service;
 
-import com.microservices.order.dto.OrderItemRequest;
 import com.microservices.order.dto.OrderRequest;
 import com.microservices.order.dto.OrderResponse;
 import com.microservices.order.entity.Order;
-import com.microservices.order.entity.OrderItem;
-import com.microservices.order.repository.OrderItemRepository;
 import com.microservices.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,32 +18,21 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final OrderItemRepository orderItemRepository;
+
 
     @Transactional
     public OrderResponse createOrder(OrderRequest request) {
-        // Calculate total amount (simplified, should integrate with product service)
-        Double totalAmount = request.getItems().size() * 100.0; // Placeholder
+        // Calculate total amount from request
+        BigDecimal totalAmount = request.getTotalAmount();
 
         Order order = Order.builder()
                 .userId(request.getUserId())
-                .orderStatus("PENDING")
+                .orderStatus("CREATED")
                 .totalAmount(totalAmount)
-                .currency("USD")
+                .currency(request.getCurrency())
                 .build();
 
         Order savedOrder = orderRepository.save(order);
-
-        // Save order items
-        for (OrderItemRequest itemRequest : request.getItems()) {
-            OrderItem orderItem = OrderItem.builder()
-                    .orderId(savedOrder.getOrderId())
-                    .productId(itemRequest.getProductId())
-                    .quantity(itemRequest.getQuantity())
-                    .build();
-            orderItemRepository.save(orderItem);
-        }
-
         return mapToResponse(savedOrder);
     }
 
@@ -77,6 +64,7 @@ public class OrderService {
                 .totalAmount(order.getTotalAmount())
                 .currency(order.getCurrency())
                 .createdAt(order.getCreatedAt())
+                .updatedAt(order.getUpdatedAt())
                 .build();
     }
 }

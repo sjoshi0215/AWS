@@ -22,7 +22,7 @@ public class UserService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .passwordHash(request.getPassword())
                 .phone(request.getPhone())
                 .status("ACTIVE")
                 .build();
@@ -51,7 +51,7 @@ public class UserService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPasswordHash(request.getPassword());
         user.setPhone(request.getPhone());
 
         User updatedUser = userRepository.save(user);

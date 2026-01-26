@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -15,5 +15,6 @@ import java.util.UUID;
 public class OrderRequest {
 
     private UUID userId;
-    private List<OrderItemRequest> items;
+    private BigDecimal totalAmount;
+    private String currency;
 }

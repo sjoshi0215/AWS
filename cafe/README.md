@@ -25,6 +25,33 @@
         CREATE INDEX idx_product_name
             ON product_schema.product(name);
 
+            INSERT STATEMENT
+
+            INSERT INTO product_schema.product
+                (product_id, name, description, price, currency, quantity_available, status)
+            VALUES
+                (
+                    gen_random_uuid(),
+                    'Donut',
+                    'Freshly baked glazed donut',
+                    2.50,
+                    'USD',
+                    100,
+                    'ACTIVE'
+                ),
+                (
+                    gen_random_uuid(),
+                    'Cake',
+                    'Chocolate layered cake',
+                    15.00,
+                    'USD',
+                    50,
+                    'ACTIVE'
+    );
+
+
+
+
 
 
     b) USER SCHEMA

@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "orders", schema = "order_schema")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,23 +25,32 @@ public class Order {
     @Column(nullable = false)
     private UUID userId;
 
-    @Column(nullable = false)
+    @Column(name = "order_status", nullable = false)
     private String orderStatus;
 
-    @Column(nullable = false)
-    private Double totalAmount;
+    @Column(name = "total_amount", nullable = false)
+    private BigDecimal totalAmount;
 
     @Column(nullable = false)
     private String currency;
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
         if (orderStatus == null) {
-            orderStatus = "PENDING";
+            orderStatus = "CREATED";
         }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 }
